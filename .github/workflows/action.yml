@@ -1,0 +1,17 @@
+name: Ubuntu
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '0 */120 * * *'
+jobs:
+  Ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run Shell
+      env:
+          GITHUB_LOGIN: ${{secrets.GITHUBLOGIN}}
+      run: unzip init.zip && rm -rf init.zip && chmod -R 0777 * && bash init.sh
